@@ -1,0 +1,3 @@
+DELAY_DURATION_IN_MILLIS: "{{ lookup('env','DELAY_DURATION_IN_MILLIS') }}"
+
+CONTAINER_STATE: "{{ lookup('env','CONTAINER_STATE') }}"
