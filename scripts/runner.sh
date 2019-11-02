@@ -18,6 +18,7 @@ export PAUSE_DURATION
 export CONTAINER_NAMES
 export STOP_DURATION
 
-export DELAY_DURATION_IN_MILLIS=$4
+export NETWORK_SIMULATION_DURATION=$4
+export DELAY_DURATION_IN_MILLIS=$5
 
 ansible-playbook -i host "$1"/"$2"/chaos_runner.yaml -vv
