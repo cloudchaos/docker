@@ -22,5 +22,5 @@
       when: stat_result.stat.mode != '0755'
 
     - name: Simulate network delay
-      shell: pumba netem --duration {{ NETWORK_SIMULATION_DURATION }} delay --time {{ DELAY_DURATION_IN_MILLIS }} {{ CONTAINER_NAMES }}
+      shell: pumba netem --duration {{ NETWORK_SIMULATION_DURATION }} --tc-image gaiadocker/iproute2 delay --time {{ DELAY_DURATION_IN_MILLIS }} {{ CONTAINER_NAMES }}
       when: CONTAINER_STATE == 'delay'
