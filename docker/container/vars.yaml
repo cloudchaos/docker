@@ -1,0 +1,7 @@
+CONTAINER_STATE: "{{ lookup('env','CONTAINER_STATE') }}"
+
+CONTAINER_NAMES: "{{ lookup('env','CONTAINER_NAMES') }}"
+
+PAUSE_DURATION: "{{ lookup('env','PAUSE_DURATION') }}"
+
+STOP_DURATION: "{{ lookup('env','STOP_DURATION') }}"

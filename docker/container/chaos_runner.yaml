@@ -1,0 +1,34 @@
+- hosts: localhost
+  connection: local
+
+  vars_files:
+    - vars.yaml
+
+  tasks:
+    - name: Check if pumba exists
+      stat:
+        path: /usr/local/bin/pumba
+      register: stat_result
+
+    - name: Install pumba if not present
+      shell: curl -L https://github.com/alexei-led/pumba/releases/download/0.6.5/pumba --output /usr/local/bin/pumba
+      when: stat_result.stat.exists == False
+
+    - name: Give proper execute permission
+      file:
+        path: /usr/local/bin/pumba
+        state: touch
+        mode: u+x
+      when: stat_result.stat.mode != '0755'
+
+    - name: Killing Containers
+      shell: pumba kill {{ CONTAINER_NAMES }}
+      when: CONTAINER_STATE == 'kill'
+
+    - name: Pausing Containers
+      shell: pumba pause --duration {{ PAUSE_DURATION }} {{ CONTAINER_NAMES }}
+      when: CONTAINER_STATE == 'pause'
+
+    - name: Stopping Containers
+      shell: pumba stop --time {{ STOP_DURATION }} {{ CONTAINER_NAMES }}
+      when: CONTAINER_STATE == 'stop'
